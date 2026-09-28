@@ -1,0 +1,71 @@
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.rsuser
+
+# Build output
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+[Dd]ebug/
+[Rr]elease/
+artifacts/
+
+# Visual Studio generated files
+Generated Files/
+*.pdb
+*.ilk
+*.iobj
+*.ipdb
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+
+# Test results and coverage
+TestResults/
+[Tt]est[Rr]esult*/
+coverage/
+
+# Temporary files
+*.tmp
+*.temp
+*.cache
+~$*
+*.bak
+
+# IDEs
+.vscode/
+.idea/
+
+# Node.js
+node_modules/
+
+# ASP.NET Core publish output
+publish/
+
+# Publish profiles / deployment settings
+*.pubxml
+*.publishproj
+PublishScripts/
+
+# Local certificates
+*.pfx
+*.p12
+
+# Local databases
+*.mdf
+*.ldf
+*.ndf
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Local configuration
+appsettings.json

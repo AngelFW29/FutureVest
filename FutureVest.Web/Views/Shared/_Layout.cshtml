@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<title>@ViewData["Title"] - FutureVest</title>
+
+	<script type="importmap"></script>
+	<link rel="icon" type="image/x-icon" href="~/favicon.ico">
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/FutureVest.Web.styles.css" asp-append-version="true" />
+</head>
+
+<body class="fv-body">
+
+	@{
+		var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+		var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
+
+		var isHome = currentController == "Home" && currentAction == "Index";
+		var isCountry = currentController == "Country";
+		var isMacroindicator = currentController == "Macroindicator";
+		var isCountryIndicator = currentController == "CountryIndicator";
+		var isReturnRateSetting = currentController == "ReturnRateSetting";
+		var isSimulationMacroindicator = currentController == "SimulationMacroindicator";
+	}
+
+	<header>
+		<nav class="navbar navbar-expand-lg fv-navbar">
+			<div class="container">
+
+				<a class="navbar-brand fv-brand" asp-area="" asp-controller="Home" asp-action="Index">
+					<i class="bi bi-graph-up-arrow fv-brand-icon me-2"></i>
+					FutureVest
+				</a>
+
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavigation" aria-controls="mainNavigation" aria-expanded="false" aria-label="Mostrar navegación">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="mainNavigation">
+
+					<ul class="navbar-nav ms-auto">
+						<li class="nav-item">
+							<a class="nav-link fv-nav-link @(isHome ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link fv-nav-link @(isCountry ? "active" : "")" asp-area="" asp-controller="Country" asp-action="Index">Países</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link fv-nav-link @(isMacroindicator ? "active" : "")" asp-area="" asp-controller="Macroindicator" asp-action="Index">Macroindicadores</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link fv-nav-link @(isCountryIndicator ? "active" : "")" asp-area="" asp-controller="CountryIndicator" asp-action="Index">Indicadores por países</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link fv-nav-link @(isReturnRateSetting ? "active" : "")" asp-area="" asp-controller="ReturnRateSetting" asp-action="Save">Tasas de retorno</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link fv-nav-link @(isSimulationMacroindicator ? "active" : "")" asp-area="" asp-controller="SimulationMacroindicator" asp-action="Index">Simulador de ranking</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+
+	<main role="main" class="flex-grow-1">
+		<div class="container py-4">
+			@RenderBody()
+		</div>
+	</main>
+
+	<footer class="fv-footer">
+		<div class="container text-center">
+			<span>
+				&copy; @DateTime.Now.Year - FutureVest
+			</span>
+			<small>
+				— Desarrollado por
+					<a href="https://github.com/AngelFW29" target="_blank" class="fv-footer-link text-decoration-none ms-2">
+					<i class="bi bi-github"> AngelFW29</i>
+				</a>
+			</small>
+		</div>
+	</footer>
+
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+
+	@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,21 @@
+﻿@model List<SimulationMacroindicatorViewModel>;
+
+@{
+    ViewData["Title"] = "Simulador de ranking";
+}
+
+<div class="container py-4">
+
+    <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3 mb-4">
+        <div>
+            <h1 class="fv-page-title mb-1">Macroindicadores de la simulación</h1>
+            <p class="fv-page-description mb-0">Configura los macroindicadores y pesos que se usarán para simular el ranking.</p>
+        </div>
+        <partial name="Partials/_AddButton" />
+    </div>
+
+    <partial name="Partials/_SimulationMacroindicatorTable" model="Model" />
+
+    <partial name="Partials/_SimulateRankingForm" />
+
+</div>

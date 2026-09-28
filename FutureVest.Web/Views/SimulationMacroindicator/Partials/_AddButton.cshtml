@@ -1,0 +1,10 @@
+﻿@if (ViewBag.CanAddMore == true)
+{
+    <a asp-area="" asp-controller="SimulationMacroindicator" asp-action="Create" class="btn fv-btn-primary"><i class="bi bi-plus-lg me-1"></i>Agregar macroindicador</a>
+}
+else
+{
+    <button type="button" class="btn fv-btn-primary disabled" disabled title="No hay macroindicadores disponibles o el peso ya suma 1">
+        <i class="bi bi-plus-lg me-1"></i>Agregar macroindicador
+    </button>
+}

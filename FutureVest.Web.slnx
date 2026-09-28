@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="FutureVest.Application/FutureVest.Application.csproj" />
+  <Project Path="FutureVest.Persistence/FutureVest.Persistence.csproj" />
+  <Project Path="FutureVest.Web/FutureVest.Web.csproj" />
+</Solution>

@@ -1,0 +1,36 @@
+﻿@model DeleteSimulationMacroindicatorViewModel;
+@{
+    ViewData["Title"] = "Eliminar macroindicador de la simulación";
+}
+
+<div class="container py-4">
+
+    <div class="mb-4">
+        <h1 class="fv-page-title mb-1">Eliminar macroindicador de la simulación</h1>
+        <p class="fv-page-description mb-0">Confirma la eliminación del macroindicador seleccionado.</p>
+    </div>
+
+    <div class="fv-delete-confirmation mb-4">
+        <div class="d-flex align-items-start gap-3">
+            <i class="bi bi-exclamation-triangle fv-delete-icon mt-1"></i>
+
+            <div>
+                <p class="mb-2">¿Está seguro que desea eliminar este macroindicador de la simulación?</p>
+                <p class="mb-1">Macroindicador: <strong>@Model.Macroindicator?.Name</strong></p>
+                <p class="fv-page-description mb-0">Peso: <strong>@Model.Weight.ToString("0.##")</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <partial name="_ValidationSummary" />
+
+    <form asp-controller="SimulationMacroindicator" asp-action="Delete" method="post">
+        <input type="hidden" asp-for="Id" />
+
+        <div class="d-flex gap-2">
+            <a asp-area="" asp-controller="SimulationMacroindicator" asp-action="Index" class="btn btn-outline-secondary"><i class="bi bi-arrow-left me-1"></i>Cancelar</a>
+            <button type="submit" class="btn btn-outline-danger"><i class="bi bi-trash3 me-1"></i>Aceptar</button>
+        </div>
+    </form>
+
+</div>

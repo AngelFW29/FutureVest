@@ -1,0 +1,103 @@
+﻿@model RankingViewModel;
+
+@{
+	ViewData["Title"] = "Home";
+}
+
+<div class="container py-4">
+
+	<div class="mb-4">
+		<h1 class="fv-page-title mb-1">
+			Ranking de países
+		</h1>
+
+		<p class="fv-page-description mb-0">
+			Consulta el ranking de inversión según los indicadores macroeconómicos registrados.
+		</p>
+	</div>
+
+	<form asp-controller="Home" asp-action="Index" method="post" class="mb-4">
+
+		<partial name="_ValidationSummary" />
+
+		<div class="row align-items-end g-3">
+
+			<div class="col-12 col-md-4 col-lg-3">
+				<label asp-for="SelectedYear" class="form-label fv-form-label">
+					Año
+				</label>
+
+				<select asp-for="SelectedYear" class="form-select fv-input">
+					@foreach (var year in Model.AvailableYears)
+					{
+						<option value="@year">@year</option>
+					}
+				</select>
+			</div>
+
+			<div class="col-12 col-md-auto">
+				<button type="submit" class="btn fv-btn-primary px-4">
+					Obtener ranking
+				</button>
+			</div>
+		</div>
+	</form>
+
+	@if (!string.IsNullOrEmpty(Model.ErrorMessage))
+	{
+		<div class="alert fv-alert mb-4" role="alert">
+			<p class="mb-2">@Model.ErrorMessage</p>
+
+			@if (Model.ErrorType == ErrorType.InvalidWeights)
+			{
+				<a asp-controller="Macroindicator" asp-action="Index" class="fw-medium text-decoration-none"
+				   style="color: var(--fv-primary-dark);">
+					Ir al mantenimiento de macroindicadores
+				</a>
+			}
+			else if (Model.ErrorType == ErrorType.NotEnoughCountries)
+			{
+				<a asp-controller="CountryIndicator" asp-action="Index" class="fw-medium text-decoration-none"
+				   style="color: var(--fv-primary-dark);">
+					Ir al mantenimiento de indicadores por países
+				</a>
+			}
+		</div>
+	}
+
+	@if (Model.ListRanking.Any())
+	{
+		<div class="mb-3">
+			<h2 class="fv-section-title mb-1">Resultados</h2>
+			<p class="fv-page-description mb-0">Ranking correspondiente al año @Model.SelectedYear.</p>
+		</div>
+
+		<div class="table-responsive fv-table-container">
+
+			<table class="table table-striped table-hover mb-0 align-middle fv-table">
+
+				<thead class="table-light">
+					<tr>
+						<th scope="col">País</th>
+						<th scope="col">Código ISO</th>
+						<th scope="col" class="text-end">Scoring</th>
+						<th scope="col" class="text-end">Tasa de retorno estimada</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					@foreach (var item in Model.ListRanking)
+					{
+						<tr>
+							<td class="fw-medium">@item.CountryName</td>
+							<td>@item.IsoCode</td>
+							<td class="text-end">@item.Scoring.ToString("F2")</td>
+							<td class="text-end fv-return-rate">@((item.EstimatedReturnRate * 100).ToString("F2"))%</td>
+						</tr>
+					}
+				</tbody>
+
+			</table>
+		</div>
+	}
+</div>

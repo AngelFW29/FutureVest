@@ -1,0 +1,210 @@
+:root {
+    --fv-primary: #0f52ba;
+    --fv-primary-dark: #003c90;
+    --fv-surface: #f7fafc;
+    --fv-surface-white: #ffffff;
+    --fv-text: #181c1e;
+    --fv-text-secondary: #434653;
+    --fv-outline: #c3c6d5;
+    --fv-error: #93000a;
+    --fv-error-bg: #ffdad6;
+    --fv-radius: 0.25rem;
+    --fv-radius-lg: 0.5rem;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    font-family: "Inter", sans-serif;
+    background-color: var(--fv-surface);
+    color: var(--fv-text);
+}
+
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.2rem rgba(15, 82, 186, 0.15);
+}
+
+/* Layout */
+
+.fv-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.fv-navbar {
+    background-color: var(--fv-surface-white);
+    border-bottom: 1px solid var(--fv-outline);
+}
+
+.fv-brand {
+    color: var(--fv-primary-dark);
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+}
+.fv-brand-icon {
+    font-size: 1.5rem;
+    -webkit-text-stroke: 1px currentColor;
+}
+
+    .fv-brand:hover {
+        color: var(--fv-primary);
+    }
+
+.fv-nav-link {
+    color: var(--fv-text-secondary);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+    .fv-nav-link:hover {
+        color: var(--fv-primary);
+    }
+
+    .fv-nav-link.active {
+        color: var(--fv-primary-dark);
+    }
+
+.fv-footer {
+    margin-top: auto;
+    padding: 1rem 0;
+    background-color: var(--fv-surface-white);
+    border-top: 1px solid var(--fv-outline);
+    color: var(--fv-text-secondary);
+    font-size: 12px;
+}
+
+/* Typography */
+
+.fv-page-title {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 40px;
+    color: var(--fv-text);
+}
+
+.fv-section-title {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 32px;
+    color: var(--fv-text);
+}
+
+.fv-page-description {
+    font-size: 14px;
+    color: var(--fv-text-secondary);
+}
+
+.fv-form-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--fv-text);
+}
+
+/* Buttons */
+
+.fv-btn-primary {
+    background-color: var(--fv-primary);
+    border-color: var(--fv-primary);
+    color: #ffffff;
+    border-radius: var(--fv-radius);
+    font-weight: 500;
+}
+
+    .fv-btn-primary:hover {
+        background-color: var(--fv-primary-dark);
+        border-color: var(--fv-primary-dark);
+        color: #ffffff;
+    }
+
+/* Inputs */
+
+.fv-input {
+    border-color: var(--fv-outline);
+    border-radius: var(--fv-radius);
+    max-width: 500px;
+}
+
+    .fv-input:focus {
+        border-color: var(--fv-primary);
+        box-shadow: 0 0 0 0.2rem rgba(15, 82, 186, 0.15);
+    }
+
+/* Alerts */
+
+.fv-alert {
+    background-color: var(--fv-error-bg);
+    border: 1px solid #f1b8b2;
+    color: var(--fv-error);
+    border-radius: var(--fv-radius);
+}
+
+/* Tables */
+
+.fv-table-container {
+    border: 1px solid var(--fv-outline);
+    border-radius: var(--fv-radius-lg);
+    overflow: hidden;
+}
+
+.fv-table th {
+    font-size: 13px;
+    color: var(--fv-text-secondary);
+}
+
+.fv-table td {
+    color: var(--fv-text);
+}
+
+.fv-return-rate {
+    color: var(--fv-primary-dark);
+    font-weight: 500;
+}
+
+/* Bootstrap form-floating */
+
+.form-floating > .form-control-plaintext::placeholder,
+.form-floating > .form-control::placeholder {
+    color: var(--bs-secondary-color);
+    text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder,
+.form-floating > .form-control:focus::placeholder {
+    text-align: start;
+}
+
+
+/* Delete */
+.fv-delete-confirmation {
+    max-width: 600px;
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--fv-outline);
+    border-bottom: 1px solid var(--fv-outline);
+}
+
+.fv-delete-icon {
+    color: var(--fv-error);
+    font-size: 1.25rem;
+}
+
+.fv-delete-name {
+    color: var(--fv-text);
+    font-size: 16px;
+    font-weight: 600;
+}
