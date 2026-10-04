@@ -49,7 +49,14 @@ namespace FutureVest.Web.Controllers
                 IsoCode = scvm.IsoCode
             };
 
-            await _countryService.AddAsync(countryDto);
+            var result = await _countryService.AddAsync(countryDto);
+
+            if (!result.Success)
+            {
+                ModelState.AddModelError("", result.ErrorMessage!);
+                return View("Save", scvm);
+            }
+
             return RedirectToRoute(new { controller = "Country", action = "Index" });
         }
 
@@ -88,8 +95,14 @@ namespace FutureVest.Web.Controllers
                 Name = scvm.Name,
                 IsoCode = scvm.IsoCode
             };
+            
+            var result = await _countryService.UpdateAsync(countryDto);
+            if (!result.Success)
+            {
+                ModelState.AddModelError("", result.ErrorMessage!);
+                return View("Save", scvm);
+            }
 
-            await _countryService.UpdateAsync(countryDto);
             return RedirectToRoute(new { controller = "Country", action = "Index" });
         }
 

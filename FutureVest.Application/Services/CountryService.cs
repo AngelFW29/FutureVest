@@ -1,4 +1,5 @@
-﻿using FutureVest.Application.Dtos.Country;
+﻿using FutureVest.Application.Common;
+using FutureVest.Application.Dtos.Country;
 using FutureVest.Persistence.Contexts;
 using FutureVest.Persistence.Entities;
 using FutureVest.Persistence.Repositories;
@@ -14,38 +15,53 @@ namespace FutureVest.Application.Services
             _countryRepository = new CountryRepository(futureVestContext);
         }
 
-        public async Task<bool> AddAsync(CountryDto countryDto)
+        public async Task<ServiceResponse> AddAsync(CountryDto countryDto)
         {
             try
             {
-                Country entity = new() { Id = 0, Name = countryDto.Name, IsoCode = countryDto.IsoCode };
+                var countries = await _countryRepository.GetAll();
+                bool isDuplicate = countries.Any(c => c.IsoCode == countryDto.IsoCode);
 
-                Country? returnEntity = await _countryRepository.AddAsync(entity);
-                return returnEntity != null;
+                if (isDuplicate)
+                {
+                    return ServiceResponse.Fail("Ya existe un país registrado con ese código ISO.");
+                }
+
+                Country country = new() { Id = 0, Name = countryDto.Name, IsoCode = countryDto.IsoCode };
+
+                Country? returnCountry = await _countryRepository.AddAsync(country);
+                return returnCountry != null
+                    ? ServiceResponse.Ok()
+                    : ServiceResponse.Fail("No se pudo crear el país");
             }
             catch (Exception)
             {
-                return false;
+                return ServiceResponse.Fail("Ocurrió un error inesperado");
             }
         }
 
-        public async Task<bool> UpdateAsync(CountryDto countryDto)
+        public async Task<ServiceResponse> UpdateAsync(CountryDto countryDto)
         {
             try
             {
-                Country entity = new()
-                {
-                    Id = countryDto.Id,
-                    Name = countryDto.Name,
-                    IsoCode = countryDto.IsoCode
-                };
+                var countries = await _countryRepository.GetAll();
+                bool isDuplicate = countries.Any(c => c.IsoCode == countryDto.IsoCode && c.Id != countryDto.Id);
 
-                Country? returnEntity = await _countryRepository.UpdateAsync(entity.Id, entity);
-                return returnEntity != null;
+                if (isDuplicate)
+                {
+                    return ServiceResponse.Fail("Ya existe un país registrado con ese código ISO");
+                }
+
+                Country country = new() { Id = countryDto.Id, Name = countryDto.Name, IsoCode = countryDto.IsoCode };
+
+                Country? returnCountry = await _countryRepository.UpdateAsync(country.Id, country);
+                return returnCountry != null
+                    ? ServiceResponse.Ok()
+                    : ServiceResponse.Fail("No se pudo editar el país");
             }
             catch (Exception)
             {
-                return false;
+                return ServiceResponse.Fail("Ocurrió un error inesperado");
             }
         }
 
